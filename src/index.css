@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/fraunces.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/hankengrotesk.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/ibmplexmono.woff2') format('woff2');
+}
+
+:root {
+  /* Material Design 3 & Warm Paper Palette */
+  --color-paper: #FAF8F5;
+  --color-card: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-hairline: #E8E2D8;
+  --color-border: #E8E2D8;
+  --color-ink: #1C1917;
+  --color-ink-deep: #1C1917;
+  --color-muted: #78716C;
+  --color-text-secondary: #78716C;
+
+  /* Accent & Pastels */
+  --color-saffron: #D97706; /* Primary warm amber */
+  --color-accent: #D97706;
+  --color-teal: #0D9488;
+  --color-clay: #EA580C;
+  --color-indigo: #4F46E5;
+  --color-plum: #9333EA;
+
+  /* Soft Muted Pastel Accents */
+  --pastel-sky: #E0F2FE;
+  --pastel-lavender: #F3E8FF;
+  --pastel-peach: #FFEDD5;
+  --pastel-sage: #DCFCE7;
+
+  --font-serif: 'Playfair Display', 'Fraunces', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  --font-handwriting: 'Caveat', cursive, sans-serif;
+}
+
+.dark {
+  /* Deep Black with subtle vibrant/neon highlights */
+  --color-paper: #09090B;
+  --color-card: #141416;
+  --color-surface: #141416;
+  --color-hairline: #26262B;
+  --color-border: #26262B;
+  --color-ink: #F5F5F7;
+  --color-ink-deep: #050506;
+  --color-muted: #A1A1AA;
+  --color-text-secondary: #A1A1AA;
+
+  --color-saffron: #FBBF24;
+  --color-accent: #FBBF24;
+  --color-teal: #2DD4BF;
+  --color-clay: #FB923C;
+  --color-indigo: #818CF8;
+  --color-plum: #C084FC;
+
+  --pastel-sky: #082F49;
+  --pastel-lavender: #3B0764;
+  --pastel-peach: #431407;
+  --pastel-sage: #052E16;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.font-handwriting {
+  font-family: var(--font-handwriting);
+}
+
+/* Material Design 3 elevation shadows */
+.md3-elevation-1 {
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+}
+
+.md3-elevation-2 {
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+}
+
+.md3-elevation-3 {
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 9999px;
+}
+
+/* Material Symbols Rounded standard styling */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.material-symbols-rounded.is-filled,
+.material-symbols-rounded.filled {
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 600,
+    'GRAD' 0,
+    'opsz' 24;
+}

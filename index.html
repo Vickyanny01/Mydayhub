@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        // Intercept Vite HMR WebSocket in Cloud Run iframe/proxy environment where HMR port is closed
+        var NativeWebSocket = window.WebSocket;
+        if (NativeWebSocket) {
+          window.WebSocket = function (url, protocols) {
+            if (protocols === 'vite-hmr' || (typeof url === 'string' && (url.includes('token=') || url.includes('24678')))) {
+              var stub = new EventTarget();
+              stub.readyState = 1; // WebSocket.OPEN
+              stub.OPEN = 1;
+              stub.CLOSED = 3;
+              stub.CLOSING = 2;
+              stub.CONNECTING = 0;
+              stub.send = function () {};
+              stub.close = function () {};
+              setTimeout(function () {
+                stub.dispatchEvent(new Event('open'));
+              }, 0);
+              return stub;
+            }
+            return new NativeWebSocket(url, protocols);
+          };
+          window.WebSocket.prototype = NativeWebSocket.prototype;
+          window.WebSocket.OPEN = 1;
+          window.WebSocket.CLOSED = 3;
+          window.WebSocket.CLOSING = 2;
+          window.WebSocket.CONNECTING = 0;
+        }
+
+        // Suppress [vite] console error output in preview
+        var origConsoleError = console.error;
+        console.error = function () {
+          var first = arguments[0];
+          if (typeof first === 'string' && (first.includes('[vite]') || first.includes('WebSocket'))) {
+            return;
+          }
+          return origConsoleError.apply(console, arguments);
+        };
+
+        window.addEventListener('error', function (e) {
+          var msg = (e && (e.message || (e.error && e.error.message))) || '';
+          if (typeof msg === 'string' && (msg.includes('WebSocket') || msg.includes('websocket') || msg.includes('vite') || msg.includes('ws://') || msg.includes('wss://'))) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            return true;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function (e) {
+          var reason = (e && e.reason && (e.reason.message || e.reason)) || '';
+          if (typeof reason === 'string' && (reason.includes('WebSocket') || reason.includes('websocket') || reason.includes('vite'))) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <title>MyDay Hub</title>
+    <meta name="description" content="Mobile-first offline personal journal and daily organizer with PIN security, routines, keepsakes, diary, and calendar." />
+    <meta property="og:title" content="MyDay Hub" />
+    <meta property="og:description" content="Mobile-first offline personal journal and daily organizer with PIN security, routines, keepsakes, diary, and calendar." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#FAF8F5" id="theme-color-meta" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MyDay Hub" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head>
+  <body class="bg-[#FAF8F5] text-[#1A1A1A] antialiased selection:bg-[#D97706]/15 selection:text-[#1A1A1A] min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

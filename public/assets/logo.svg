@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#F4EFE6" rx="100"/>
+  <!-- Outer subtle circular ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#B8893B" stroke-width="4" opacity="0.4"/>
+  
+  <!-- Developer Logo Geometry -->
+  <g transform="translate(56, 56) scale(0.78125)">
+    <!-- Center vertical line -->
+    <line x1="256" y1="30" x2="256" y2="482" stroke="#0E0E0E" stroke-width="22" stroke-linecap="round"/>
+    
+    <!-- Left D frame -->
+    <path d="M 100 90 L 256 90 C 350 90, 350 422, 256 422 L 100 422 Z" 
+          fill="none" stroke="#0E0E0E" stroke-width="22" stroke-linejoin="round" stroke-linecap="round"/>
+    
+    <!-- Right D frame (mirrored) -->
+    <path d="M 412 90 L 256 90 C 162 90, 162 422, 256 422 L 412 422 Z" 
+          fill="none" stroke="#0E0E0E" stroke-width="22" stroke-linejoin="round" stroke-linecap="round"/>
+          
+    <!-- Center intersecting ring -->
+    <circle cx="256" cy="256" r="120" fill="none" stroke="#B8893B" stroke-width="18"/>
+  </g>
+</svg>

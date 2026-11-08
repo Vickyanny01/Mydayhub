@@ -1,0 +1,6 @@
+{
+  "name": "MyDay Hub",
+  "description": "Mobile-first offline personal journal and daily organizer with PIN security, routines, keepsakes, diary, and calendar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
